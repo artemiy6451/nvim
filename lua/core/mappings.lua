@@ -7,8 +7,7 @@ vim.keymap.set("i","jk","<esc>",{noremap=true})
 -------------------
 ----- NeoTree -----
 -------------------
-vim.keymap.set('n', '<leader>e', ':Neotree focus toggle<CR>')
--- vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>e', ':Neotree float focus toggle<CR>')
 -- Show buffers 
 vim.keymap.set('n', '<leader>b', ':Neotree float toggle show buffers<CR>')
 -- Show Git
@@ -24,7 +23,7 @@ vim.keymap.set('n', 'gn', ':bn<CR>',{noremap=true})
 vim.keymap.set('n', 'gp', ':bp<CR>',{noremap=true})
 
 -- Toggle comment
--- vim.keymap.set('n', '<leader>/', ':CommentToggle<CR>')
+vim.keymap.set('n', '<leader>/', ':CommentToggle<CR>')
 
 -- Undo Tree
 vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)

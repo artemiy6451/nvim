@@ -9,9 +9,6 @@ vim.fn.sign_define("DiagnosticSignHint",
 {text = "󰌵", texthl = "DiagnosticSignHint"})
 
 require("neo-tree").setup({
-    open_on_tab = true,
-    quit_on_open = true,
-
 	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
 	popup_border_style = "rounded",
 	enable_git_status = true,
@@ -32,6 +29,7 @@ require("neo-tree").setup({
 	    last_indent_marker = "└",
 	    highlight = "NeoTreeIndentMarker",
 	    with_expanders = true,
+	    -- expander config, needed for nesting files
 	    expander_collapsed = "",
 	    expander_expanded = "",
 	    expander_highlight = "NeoTreeExpander",

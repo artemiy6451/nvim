@@ -18,6 +18,54 @@ lspconfig.bashls.setup{
 
 lspconfig.lua_ls.setup {
     on_attach = on_attach,
+
+-- Lsp for python
+lspconfig.pyright.setup {}
+
+-- Lsp for bash
+lspconfig.bashls.setup{}
+
+-- Lsp for emmet
+lspconfig.emmet_ls.setup({
+    capabilities = capabilities,
+    filetypes = { "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+    init_options = {
+      html = {
+        options = {
+          ["bem.enabled"] = true,
+        },
+      },
+    }
+})
+
+-- Lsp for stylelint
+lspconfig.stylelint_lsp.setup({
+    settings = {
+    stylelintplus = {
+        validateOnSave = true,
+    }
+  },
+    root_dir = function(fname)    
+        return vim.loop.cwd()
+    end,
+})
+
+-- Lsp for eslint
+lspconfig.eslint.setup{
+    root_dir = function(fname)    
+        return vim.loop.cwd()
+    end,
+}
+
+-- Lsp for tsserver
+lspconfig.tsserver.setup{
+    root_dir = function(fname)    
+        return vim.loop.cwd()
+    end,
+}
+
+-- Lsp for lua
+lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             runtime = {

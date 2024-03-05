@@ -104,4 +104,12 @@ require("lazy").setup({
 
     -- Lualine
     {"nvim-lualine/lualine.nvim"}
+    -- Live Server
+    {'barrett-ruth/live-server.nvim'},
+
+    -- Auto comments
+    {'terrortylor/nvim-comment'},
+
+    -- Vim be good game
+    {'ThePrimeagen/vim-be-good'},
 })
