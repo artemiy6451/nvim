@@ -62,14 +62,11 @@ require("lazy").setup({
     -- Autopairs
     {'windwp/nvim-autopairs'},
 
-    --Buffer line
-    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
-
     --UndoTree
     {'mbbill/undotree'},
 
     -- Git
-    {'tpope/vim-fugitive'},
+    -- {'tpope/vim-fugitive'},
 
     --NeoTest
     {
@@ -103,7 +100,8 @@ require("lazy").setup({
     {"lewis6991/gitsigns.nvim"},
 
     -- Lualine
-    {"nvim-lualine/lualine.nvim"}
+    {"nvim-lualine/lualine.nvim"},
+
     -- Live Server
     {'barrett-ruth/live-server.nvim'},
 
@@ -112,4 +110,7 @@ require("lazy").setup({
 
     -- Vim be good game
     {'ThePrimeagen/vim-be-good'},
+
+    -- Lazygit
+    {'kdheepak/lazygit.nvim'},
 })

@@ -7,11 +7,10 @@ vim.keymap.set("i","jk","<esc>",{noremap=true})
 -------------------
 ----- NeoTree -----
 -------------------
-vim.keymap.set('n', '<leader>e', ':Neotree float focus toggle<CR>')
--- Show buffers 
-vim.keymap.set('n', '<leader>b', ':Neotree float toggle show buffers<CR>')
+vim.keymap.set('n', '<leader>e', ':Neotree focus toggle<CR>')
+
 -- Show Git
-vim.keymap.set('n', '<leader>g', ':Git<CR>')
+vim.keymap.set('n', '<leader>g', ':LazyGit<CR>')
 
 -- No highlight search
 vim.keymap.set('n', ',<leader>', ':nohlsearch<CR>')
@@ -37,7 +36,6 @@ vim.keymap.set('n', '<leader>lR', ':LspRestart<CR>')
 -------------------
 ----- NeoTest -----
 -------------------
-
 vim.keymap.set('n', '<leader>tm', ':lua require("neotest").run.run()<cr>')
 vim.keymap.set('n', '<leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>')
 vim.keymap.set('n', '<leader>ts', ':lua require("neotest").run.stop()<cr>')
@@ -45,9 +43,9 @@ vim.keymap.set('n', '<leader>tt', ':lua require("neotest").summary.toggle()<cr>'
 
 -- Movement window
 -- Normal mode
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==')
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==')
+vim.keymap.set('n', '<C-j>', ':m .+1<CR>==')
+vim.keymap.set('n', '<C-k>', ':m .-2<CR>==')
 -- Visual mode
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv-gv")
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv-gv")
+vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv-gv")
+vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv-gv")
 

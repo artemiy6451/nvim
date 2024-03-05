@@ -6,28 +6,24 @@ local on_attach = function (client, bufnr)
     navic.attach(client, bufnr)
 end
 
-lspconfig.pyright.setup{
-    on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-    end
-}
-
 lspconfig.bashls.setup{
     on_attach = on_attach,
 }
 
 lspconfig.lua_ls.setup {
     on_attach = on_attach,
+}
 
 -- Lsp for python
-lspconfig.pyright.setup {}
+lspconfig.pyright.setup{
+    on_attach = on_attach,
+}
 
 -- Lsp for bash
 lspconfig.bashls.setup{}
 
 -- Lsp for emmet
 lspconfig.emmet_ls.setup({
-    capabilities = capabilities,
     filetypes = { "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
     init_options = {
       html = {
@@ -45,21 +41,21 @@ lspconfig.stylelint_lsp.setup({
         validateOnSave = true,
     }
   },
-    root_dir = function(fname)    
+    root_dir = function()
         return vim.loop.cwd()
     end,
 })
 
 -- Lsp for eslint
 lspconfig.eslint.setup{
-    root_dir = function(fname)    
+    root_dir = function()
         return vim.loop.cwd()
     end,
 }
 
 -- Lsp for tsserver
 lspconfig.tsserver.setup{
-    root_dir = function(fname)    
+    root_dir = function()
         return vim.loop.cwd()
     end,
 }
@@ -69,22 +65,17 @@ lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             runtime = {
-                -- Tell the language server which version of Lua you're using
-                -- (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
             },
             diagnostics = {
-                -- Get the language server to recognize the vim global
                 globals = {
                     'vim',
                     'require'
                 },
             },
             workspace = {
-                -- Make the server aware of Neovim runtime filees
                 library = vim.api.nvim_get_runtime_file("", true),
             },
-            -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
                 enable = false,
             },
@@ -115,7 +106,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
         vim.keymap.set('n', '<space>ld', vim.lsp.buf.type_definition, opts)
         vim.keymap.set('n', '<space>lr', vim.lsp.buf.rename, opts)
         vim.keymap.set({ 'n', 'v' }, '<space>la', vim.lsp.buf.code_action, opts)
