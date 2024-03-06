@@ -1,4 +1,7 @@
 -- Base
+-- Space as leader map
+vim.g.mapleader = " "
+
 vim.opt.scrolloff = 8
 vim.opt.swapfile = false
 
