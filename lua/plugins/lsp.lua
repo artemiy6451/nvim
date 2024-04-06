@@ -20,6 +20,17 @@ return {
             -- Lsp for python
             lspconfig.pyright.setup{
                 on_attach = on_attach,
+                cmd = { 'pyright-langserver', '--stdio', '-p', '~/.pyrightconfig.json'},
+            }
+
+            -- Lsp for golang
+            lspconfig.gopls.setup{
+                on_attach = on_attach,
+            }
+
+            -- Lsp for sql
+            lspconfig.sqls.setup{
+                on_attach = on_attach,
             }
 
             -- Lsp for emmet
