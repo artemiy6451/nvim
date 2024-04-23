@@ -1,5 +1,5 @@
 -- jk for exit to normal mode 
--- vim.keymap.set("i","jk","<esc>",{noremap=true})
+vim.keymap.set("i","jk","<esc>",{noremap=true})
 
 -- No highlight search
 vim.keymap.set('n', '<leader>,', ':nohlsearch<CR>')

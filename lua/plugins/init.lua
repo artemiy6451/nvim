@@ -1,11 +1,9 @@
-return  {
-    --AutoSave
-    {'pocco81/auto-save.nvim'},
+return {
 
     -- Live Server
-    {'barrett-ruth/live-server.nvim'},
+    { 'barrett-ruth/live-server.nvim' },
 
     -- Vim be good game
-    {'ThePrimeagen/vim-be-good'},
+    { 'ThePrimeagen/vim-be-good' },
 
 }

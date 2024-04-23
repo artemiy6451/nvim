@@ -1,7 +1,7 @@
 -- Basic
-require('core.base')
-require('core.plugins')
-require('core.mappings')
+require('base.core')
+require('base.plugins')
+require('base.mappings')
 
 -- Colorscheme
 vim.cmd("colorscheme catppuccin")

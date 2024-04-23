@@ -2,10 +2,9 @@ return {
     {
         'mfussenegger/nvim-dap',
         dependencies = {
-
-            {'mfussenegger/nvim-dap-python'},
+            { 'mfussenegger/nvim-dap-python' },
         },
-        config = function ()
+        config = function()
             require('dap-python').setup('.venv/bin/python')
         end
     },

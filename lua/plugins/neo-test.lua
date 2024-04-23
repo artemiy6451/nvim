@@ -2,16 +2,16 @@ return {
     {
         "nvim-neotest/neotest",
         dependencies = {
-            {"nvim-neotest/nvim-nio"},
-            {"nvim-lua/plenary.nvim"},
-            {"nvim-treesitter/nvim-treesitter"},
-            {"antoinemadec/FixCursorHold.nvim"},
-            {'nvim-neotest/neotest-python'},
+            { "nvim-neotest/nvim-nio" },
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" },
+            { "antoinemadec/FixCursorHold.nvim" },
+            { 'nvim-neotest/neotest-python' },
         },
-        config = function ()
+        config = function()
             require("neotest").setup({
-              adapters = {
-                require("neotest-python")({
+                adapters = {
+                    require("neotest-python")({
                         dap = {
                             justMyCode = false,
                             console = "integratedTerminal",
@@ -19,7 +19,7 @@ return {
                         args = { "--log-level", "DEBUG", "--quiet" },
                         runner = "pytest",
                     })
-              }
+                }
             })
             vim.keymap.set('n', '<leader>tm', ':lua require("neotest").run.run()<cr>')
             vim.keymap.set('n', '<leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>')

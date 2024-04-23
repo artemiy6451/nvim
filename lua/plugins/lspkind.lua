@@ -2,9 +2,9 @@ return {
     "onsails/lspkind.nvim",
     config = function()
         require('lspkind').init({
-            mode = 'symbol_text',
+            mode = 'text',
             preset = 'default',
---[[
+            ellipsis_char = '...',
             symbol_map = {
                 Text = "󰉿",
                 Method = "󰆧",
@@ -31,8 +31,8 @@ return {
                 Event = "",
                 Operator = "󰆕",
                 TypeParameter = "",
+                Codeium = "⚛",
             },
---]]
         })
     end,
 }
