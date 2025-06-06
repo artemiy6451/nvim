@@ -25,4 +25,3 @@ vim.opt.smartindent = true
 
 -- Color column
 -- vim.opt.colorcolumn = "89"
-

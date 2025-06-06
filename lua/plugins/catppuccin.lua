@@ -11,7 +11,7 @@ return {
                     light = "macchiato",
                     dark = "macchiato",
                 },
-                transparent_background = false, -- disables setting the background color.
+                transparent_background = true, -- disables setting the background color.
                 show_end_of_buffer = false,     -- shows the '~' characters after the end of buffers
                 term_colors = false,            -- sets terminal colors (e.g. `g:terminal_color_0`)
                 dim_inactive = {
@@ -25,17 +25,17 @@ return {
                 styles = {                      -- Handles the styles of general hi groups (see `:h highlight-args`):
                     comments = { "italic" },    -- Change the style of comments
                     conditionals = { "italic" },
-                    loops = {},
-                    functions = {},
-                    keywords = {},
+                    loops = { "italic" },
+                    functions = { "italic" },
+                    keywords = { "italic" },
                     strings = {},
                     variables = {},
-                    numbers = {},
-                    booleans = {},
+                    numbers = { "bold" },
+                    booleans = { "bold" },
                     properties = {},
-                    types = {},
-                    operators = {},
-                    -- miscs = {}, -- Uncomment to turn off hard-coded styles
+                    types = { "bold" },
+                    operators = { "bold" },
+                    -- miscs = { "" },
                 },
                 color_overrides = {},
                 custom_highlights = {},
@@ -46,6 +46,9 @@ return {
                     nvimtree = true,
                     treesitter = true,
                     neotree = true,
+                    fzf = true,
+                    harpoon = true,
+                    mason = true,
                     mini = {
                         enabled = true,
                         indentscope_color = "",

@@ -1,6 +1,6 @@
 -- Basic
 require('base.core')
-require('base.plugins')
+require('base.lazy')
 require('base.mappings')
 
 -- Colorscheme
