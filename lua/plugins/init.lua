@@ -7,4 +7,9 @@ return {
         opts = {},
         cmd = "Trouble",
     },
+    -- Autopairs
+    {
+        'windwp/nvim-autopairs',
+        opts = {},
+    }
 }
