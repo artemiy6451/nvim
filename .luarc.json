@@ -3,5 +3,5 @@
     "workspace.library": ["~/.config/nvim/"],
     "runtime.version": "Lua 5.3",
     "hint.enable": false,
-    "globals": ["vim"],
+    "globals": ["vim"]
 }

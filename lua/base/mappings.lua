@@ -5,21 +5,24 @@ vim.keymap.set("i","jk","<esc>",{noremap=true})
 vim.keymap.set('n', '<leader>,', ':nohlsearch<CR>')
 
 --Tab switch
--- vim.keymap.set('n', 'H', 'gT',{noremap=true})
--- vim.keymap.set('n', 'L', 'gt',{noremap=true})
-vim.keymap.set('n', 'gn', ':bn<CR>',{noremap=true})
-vim.keymap.set('n', 'gp', ':bp<CR>',{noremap=true})
+vim.keymap.set('n', 'H', '<Cmd>BufferPrevious<CR>')
+vim.keymap.set('n', 'L', '<Cmd>BufferNext<CR>')
+vim.keymap.set('n', '<leader>c', '<Cmd>BufferClose<CR>')
 
 -- Quit
-vim.keymap.set('n', '<leader>q', ':q<CR>')
+vim.keymap.set('n', '<leader>q', ':qa<CR>')
 
--- Movement window
+-- Movement lines
 vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv-gv")
 vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv-gv")
 
+-- Moviment screen
+vim.keymap.set('n', '<C-d>', "<C-d>zz")
+vim.keymap.set('n', '<C-u>', "<C-u>zz")
+
 -- Neotree
 vim.keymap.set('n', '<leader>e', function()
-    vim.cmd("Neotree focus toggle float")
+    vim.cmd("Neotree focus toggle")
 end)
 
 -- LSP
@@ -42,7 +45,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        -- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
         vim.keymap.set("n", "<space>ld", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "<space>lr", vim.lsp.buf.rename, opts)
         vim.keymap.set({ "n", "v" }, "<space>la", vim.lsp.buf.code_action, opts)
@@ -56,6 +59,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end)
     end,
 })
-
--- none-ls formating
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, {})

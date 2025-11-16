@@ -1,120 +1,137 @@
 return {
+    -- Mason
+    {
+        "williamboman/mason.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("mason").setup({
+                ui = {
+                    icons = {
+                        package_installed = "✓",
+                        package_pending = "➜",
+                        package_uninstalled = "✗"
+                    }
+                }
+            })
+        end,
+    },
+
+    -- Mason LSP Config
     {
         "williamboman/mason-lspconfig.nvim",
+        event = "VeryLazy",
         dependencies = {
             "williamboman/mason.nvim",
             "neovim/nvim-lspconfig",
-            "folke/trouble.nvim",
         },
-
         config = function()
-            local mason = require("mason")
-            local mason_lspconfig = require("mason-lspconfig")
-            local lspconfig = require("lspconfig")
-            require("trouble").setup{}
-
-            mason.setup({
+            require("mason-lspconfig").setup({
                 ensure_installed = {
-                    -- backend
-                    "bash-language-server",
-
+                    "lua_ls",
                     "pyright",
-                    "ruff",
-
-                    "gopls",
-
-                    "sqls",
-
-                    "jdtls",
-
-                    "arduino-language-server",
-
-                    "clangd",
-
-                    "lua-language-server",
-
-                    -- frontend
-                    "tsserver",
-                    "volar",
+                    "html",
+                    "cssls",
+                    "jsonls",
+                    "vimls",
+                    "bashls",
                 },
+                automatic_installation = true,
             })
+        end,
+    },
 
-            mason_lspconfig.setup({
-                handlers = {
-                    function(server_name) -- Default handler (for all servers not explicitly set)
-                        lspconfig[server_name].setup {}
-                    end,
+    -- LSP Config
+    {
+        "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local lspconfig = require("lspconfig")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-                    ['pyright'] = function()
-                        lspconfig.pyright.setup {
-                            settings = {
-                                pyright = {
-                                    -- Using Ruff's import organizer
-                                    disableOrganizeImports = true,
+            -- Автоматическая настройка серверов через mason-lspconfig
+            require("mason-lspconfig").setup({
+                ["lua_ls"] = function()
+                    lspconfig.lua_ls.setup({
+                        capabilities = capabilities,
+                        settings = {
+                            Lua = {
+                                diagnostics = {
+                                    globals = { "vim" }
                                 },
-                                python = {
-                                    analysis = {
-                                        -- Ignore all files for analysis to exclusively use Ruff for linting
-                                        ignore = { "*" },
-                                    },
-                                },
-                            },
-                        }
-                    end,
-
-                    ['ruff'] = function()
-                        lspconfig.ruff.setup {
-                            init_options = {
-                                settings = {
-                                    format = {
-                                        preview = true
+                                workspace = {
+                                    library = {
+                                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
                                     }
                                 }
                             }
                         }
-                    end,
+                    })
+                end,
 
-                    ["clangd"] = function()
-                        lspconfig.clangd.setup {
-                            filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "arduino" },
-                        }
-                    end,
+                ['pyright'] = function()
+                    lspconfig.pyright.setup {
+                        capabilities = capabilities,
+                        settings = {
+                            pyright = {
+                                -- Using Ruff's import organizer
+                                disableOrganizeImports = true,
+                            },
+                            python = {
+                                analysis = {
+                                    -- Ignore all files for analysis to exclusively use Ruff for linting
+                                    ignore = { "*" },
+                                },
+                            },
+                        },
+                    }
+                end,
 
-                    ["lua_ls"] = function()
-                        lspconfig.lua_ls.setup {
+                ['ruff'] = function()
+                    lspconfig.ruff.setup {
+                        capabilities = capabilities,
+                        isnit_options = {
                             settings = {
-                                Lua = {
-                                    runtime = {
-                                        version = "LuaJIT"
-                                    },
-                                    diagnostics = {
-                                        globals = { "vim" }
-                                    },
+                                format = {
+                                    preview = true
                                 }
                             }
                         }
-                    end,
-
-                    ["tsserver"] = function()
-                        local mason_registry = require('mason-registry')
-                        local vue_language_server_path = mason_registry.get_package('vue-language-server')
-                            :get_install_path() .. '/node_modules/@vue/language-server'
-
-                        lspconfig.tsserver.setup {
-                            init_options = {
-                                plugins = {
-                                    {
-                                        name = '@vue/typescript-plugin',
-                                        location = vue_language_server_path,
-                                        languages = { 'vue' },
-                                    },
-                                },
-                            },
-                            filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-                        }
-                    end,
-                },
+                    }
+                end,
             })
-        end
-    },
+
+            vim.lsp.config("vtsls", {
+                filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+                settings = {
+                    vtsls = { tsserver = { globalPlugins = {} } },
+                    typescript = {
+                        inlayHints = {
+                            parameterNames = { enabled = "literals" },
+                            parameterTypes = { enabled = true },
+                            variableTypes = { enabled = true },
+                            propertyDeclarationTypes = { enabled = true },
+                            functionLikeReturnTypes = { enabled = true },
+                            enumMemberValues = { enabled = true },
+                        },
+                    },
+                },
+                before_init = function(_, config)
+                    table.insert(config.settings.vtsls.tsserver.globalPlugins, {
+                        name = "@vue/typescript-plugin",
+                        location = vim.fn.expand(
+                            "$MASON/packages/vue-language-server/node_modules/@vue/language-server"
+                        ),
+                        languages = { "vue" },
+                        configNamespace = "typescript",
+                        enableForWorkspaceTypeScriptVersions = true,
+                    })
+                end,
+                on_attach = function(client)
+                    client.server_capabilities.documentFormattingProvider = false
+                    client.server_capabilities.documentRangeFormattingProvider = false
+                end,
+            })
+        end,
+    }
 }
